@@ -6,10 +6,14 @@ package za.ac.cput.domain.lookup;
  Student Number: 220187568
 */
 
+import za.ac.cput.domain.location.City;
+
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+
 
 @Embeddable
 public class Address implements Serializable {
@@ -23,7 +27,6 @@ public class Address implements Serializable {
     @NotNull
     private int postalCode;
     @NotNull
-    @Embedded
     private City city;
 
     protected Address(){}

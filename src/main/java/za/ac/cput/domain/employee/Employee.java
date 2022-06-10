@@ -2,6 +2,7 @@ package za.ac.cput.domain.employee;
 
 import za.ac.cput.domain.lookup.Name;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -19,8 +20,13 @@ public class Employee {
     private String staffID;
     @NotNull
     private String email;
+    @Embedded
     @NotNull
     private Name name;
+
+    public void setName(Name name) {
+        this.name = name;
+    }
 
     protected Employee() {}
 
