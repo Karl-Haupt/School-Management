@@ -1,5 +1,5 @@
 package za.ac.cput.domain;
-import za.ac.cput.domain.Address;
+import za.ac.cput.domain.lookup.Address;
 
 
 public class StudentAddress {
@@ -20,7 +20,7 @@ public class StudentAddress {
       return studentId;
     }
 
-    public String getAddress(){
+    public Address getAddress(){
         return address;
     }
 
@@ -36,6 +36,7 @@ public class StudentAddress {
     public static class Builder {
 
         private String studentId;
+        private Address address;
 
         public Builder setStudentId(String studentId){
             this.studentId = studentId;

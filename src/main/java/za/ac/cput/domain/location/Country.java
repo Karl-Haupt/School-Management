@@ -19,6 +19,8 @@ public class Country {
     @NotNull
     private String countryName;
 
+    protected Country() {}
+
     public Country(Country.Builder builder) {
         this.countryID = builder.countryID;
         this.countryName = builder.countryName;
