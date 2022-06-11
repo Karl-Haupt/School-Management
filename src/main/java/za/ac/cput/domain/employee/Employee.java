@@ -96,4 +96,8 @@ public class Employee {
         return Objects.equals(staffID, employee.staffID) && Objects.equals(email, employee.email) && Objects.equals(name, employee.name);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(staffID, email, name);
+    }
 }
