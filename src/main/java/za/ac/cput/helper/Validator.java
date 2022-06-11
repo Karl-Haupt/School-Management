@@ -23,8 +23,12 @@ public class Validator {
     }
 
 
-    public static boolean isValidEmail(String emailAddress){
+    public static boolean isValidEmail(String paramName, String emailAddress){
         EmailValidator validateEmail = EmailValidator.getInstance();
+        if (!validateEmail.isValid(emailAddress))
+            throw new IllegalArgumentException(
+                    String.format("Invalid value for params: %s", paramName)
+            );
         return validateEmail.isValid(emailAddress);
     }
 }
