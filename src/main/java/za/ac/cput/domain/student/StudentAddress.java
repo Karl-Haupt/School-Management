@@ -1,16 +1,26 @@
-package za.ac.cput.domain;
-import za.ac.cput.domain.Address;
+package za.ac.cput.domain.student;
+import za.ac.cput.domain.lookup.Address;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 
+@Entity
 public class StudentAddress {
 
+    @NotNull
+    @Id
     private String studentId;
+
+    @NotNull
     private Address address;
 
 
 
 
-    private StudentAddress(Builder builder) {
+    private StudentAddress (Builder builder) {
         this.studentId = builder.studentId;
         this.address = builder.address;
         
@@ -20,6 +30,7 @@ public class StudentAddress {
       return studentId;
     }
 
+
     public String getAddress(){
         return address;
     }
@@ -27,14 +38,14 @@ public class StudentAddress {
     @Override
     public String toString() {
         return "StudentAddress{" +
-                "StudentId='" + studentId + '\'' +
-                ", Address='" + address
-                + '\'' +
+                "studentId='" + studentId + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 
     public static class Builder {
 
+        public Address address;
         private String studentId;
 
         public Builder setStudentId(String studentId){
@@ -62,7 +73,17 @@ public class StudentAddress {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StudentAddress)) return false;
+        StudentAddress studentAddress = (StudentAddress) o;
+        return studentId.equals(studentAddress.studentId) && address.equals(studentAddress.address);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentId, address);
+    }
 
 }
