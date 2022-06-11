@@ -1,25 +1,31 @@
 package za.ac.cput.domain.student;
 import za.ac.cput.domain.lookup.Address;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
+
+@Entity
 public class StudentAddress {
 
+    @NotNull
+    @Id
     private String studentId;
+
+    @NotNull
     private Address address;
 
-
-
-
-    private StudentAddress(Builder builder) {
+    private StudentAddress (Builder builder) {
         this.studentId = builder.studentId;
         this.address = builder.address;
-        
     }
 
     public String getStudentId(){
       return studentId;
     }
-
+      
     public Address getAddress(){
         return address;
     }
@@ -34,7 +40,6 @@ public class StudentAddress {
     }
 
     public static class Builder {
-
         private String studentId;
         private Address address;
 
@@ -63,7 +68,17 @@ public class StudentAddress {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StudentAddress)) return false;
+        StudentAddress studentAddress = (StudentAddress) o;
+        return studentId.equals(studentAddress.studentId) && address.equals(studentAddress.address);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentId, address);
+    }
 
 }
