@@ -1,4 +1,4 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.student;
 import za.ac.cput.domain.lookup.Address;
 
 

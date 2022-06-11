@@ -2,6 +2,7 @@ package za.ac.cput.domain.employee;
 
 import za.ac.cput.domain.lookup.Name;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import java.util.Objects;
 public class Employee {
     @NotNull @Id
     private String staffID;
-    @NotNull
+    @NotNull @Column(unique=true)
     private String email;
     @Embedded
     @NotNull
