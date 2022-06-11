@@ -28,19 +28,18 @@ class EmployeeControllerTest {
     private int port;
     @Autowired
     private EmployeeController controller;
-    @Autowired
-    private TestRestTemplate restTemplate;
+    @Autowired private TestRestTemplate restTemplate;
 
     private Employee employee;
-    private Name employeeName;
     private String baseUrl;
 
     @BeforeEach
     void setUp() {
         assertNotNull(controller);
-        this.employeeName = NameFactory.buildName("John", "", "Wood");
-        this.employee = EmployeeFactory.buildEmployee("employee-id", "john@gmail.com", employeeName);
-        this.baseUrl = "http://localhost:" + this.port + "api/v1/school-management/employee/";
+        Name employeeName = NameFactory.buildName("John", "", "Wood");
+        this.employee = EmployeeFactory.buildEmployee("1", "john@gmail.com", employeeName);
+        this.baseUrl = "http://localhost:" + this.port + "/api/v1/school-management/employee/";
+        System.out.println(baseUrl);
     }
 
     @Test
@@ -67,29 +66,39 @@ class EmployeeControllerTest {
         );
     }
 
-    //TODO: Delete employee by employee entity
     @Test
-    void delete() {
+    @Order(3)
+    void findEmployeeByEmail() {
+        String url = baseUrl + "read?email=" + employee.getEmail();
+        ResponseEntity<Employee> response = this.restTemplate.getForEntity(url, Employee.class);
+        assertAll(
+                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertNotNull(response.getBody())
+        );
     }
 
     @Test
-    @Order(3)
+    @Order(6)
+    void delete() {
+        String url = baseUrl + "delete";
+        this.restTemplate.delete(url);
+    }
+
+    @Test
+    @Order(4)
     void deleteById() {
         String url = baseUrl + "delete/" + this.employee.getStaffID();
         this.restTemplate.delete(url);
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void findAll() {
         String url = baseUrl + "all";
         ResponseEntity<Employee[]> response = this.restTemplate.getForEntity(url, Employee[].class);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertEquals(0, response.getBody()),
                 () -> assertTrue(response.getBody().length == 0)
         );
     }
-
-    //TODO: Test the getEmployeeByEmail
 }

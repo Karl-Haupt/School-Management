@@ -17,6 +17,8 @@ public class StudentAddress {
     @NotNull
     private Address address;
 
+    protected StudentAddress() {}
+
     private StudentAddress (Builder builder) {
         this.studentId = builder.studentId;
         this.address = builder.address;
