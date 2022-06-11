@@ -1,5 +1,9 @@
 package za.ac.cput.service.location.impl;
-
+/*
+ This is the city service implementation test cases
+ Name & Surname: Charles Lemmert
+ Student No: 220498385
+*/
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

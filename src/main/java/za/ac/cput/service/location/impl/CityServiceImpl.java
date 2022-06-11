@@ -1,5 +1,9 @@
 package za.ac.cput.service.location.impl;
-
+/*
+ This is the city service implementation
+ Name & Surname: Charles Lemmert
+ Student No: 220498385
+*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.location.City;
