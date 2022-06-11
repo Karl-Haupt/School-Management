@@ -2,9 +2,8 @@ package za.ac.cput.repository.location;
 
 import za.ac.cput.domain.location.City;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /*
  This is the city Repository
@@ -45,9 +44,11 @@ public class CityRepository {
 
     }
 
-    public List<City> returnAllCities(){
+    public List<City> returnAllCities(String id){
         //returns all cities in the db
-        return this.cityList;
+        return this.cityList.stream()
+                .filter(city -> city.getId().equalsIgnoreCase(id))
+                .collect(Collectors.toList());
     }
 
 }
