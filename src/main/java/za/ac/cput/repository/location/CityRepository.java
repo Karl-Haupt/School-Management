@@ -41,7 +41,6 @@ public class CityRepository {
         //deletes a city by id
         this.cityList.remove(city);
 
-
     }
 
     public List<City> returnAllCities(String id){
