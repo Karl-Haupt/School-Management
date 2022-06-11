@@ -17,36 +17,31 @@ public class StudentAddress {
     @NotNull
     private Address address;
 
-
-
-
     private StudentAddress (Builder builder) {
         this.studentId = builder.studentId;
         this.address = builder.address;
-        
     }
 
     public String getStudentId(){
       return studentId;
     }
-
-
-    public String getAddress(){
+      
+    public Address getAddress(){
         return address;
     }
 
     @Override
     public String toString() {
         return "StudentAddress{" +
-                "studentId='" + studentId + '\'' +
-                ", address='" + address + '\'' +
+                "StudentId='" + studentId + '\'' +
+                ", Address='" + address
+                + '\'' +
                 '}';
     }
 
     public static class Builder {
-
-        public Address address;
         private String studentId;
+        private Address address;
 
         public Builder setStudentId(String studentId){
             this.studentId = studentId;
