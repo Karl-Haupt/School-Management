@@ -4,6 +4,7 @@ package za.ac.cput.controller.location;
  Name & Surname: Charles Lemmert
  Student No: 220498385
 */
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/school-management/city/")
+@Slf4j
 public class CityController {
     private final CityServiceImpl cityService;
 
@@ -28,6 +30,7 @@ public class CityController {
 
     @PostMapping("save")
     public ResponseEntity<City> save(@RequestBody City city) {
+        log.info("Request to save: {}", city);
         City newCity = CityFactory.buildCity(city.getId(),city.getCityName(),city.getCountry());
         City citySaved = this.cityService.save(newCity);
         return ResponseEntity.ok(citySaved);
@@ -42,12 +45,14 @@ public class CityController {
 
     @DeleteMapping("delete")
     public ResponseEntity<Void> delete(City city) {
+        log.info("Request to delete: {}", city);
         this.cityService.delete(city);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable String id) {
+        log.info("Request to delete by id: {}", id);
         this.cityService.deleteCityByID(id);
         return ResponseEntity.noContent().build();
     }
