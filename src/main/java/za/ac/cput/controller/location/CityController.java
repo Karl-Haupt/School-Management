@@ -15,8 +15,6 @@ import za.ac.cput.service.location.impl.CityServiceImpl;
 
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("api/v1/school-management/city/")
 public class CityController {

@@ -1,5 +1,6 @@
-package za.ac.cput.repository.location;
+package za.ac.cput.repository.location.impl;
 
+import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.location.City;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
  Name & Surname: Charles Lemmert
  Student No: 220498385
 */
+
 public class CityRepositoryTest {
     private final List<City> cityList;
     private static CityRepositoryTest cityRepo;
