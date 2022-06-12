@@ -36,6 +36,13 @@ public class CityServiceImpl implements ICityService {
     }
 
     @Override
+    public void deleteCityByID(String id) {
+        Optional<City> deleteCity = read(id);
+        if(deleteCity.isPresent())
+            this.cityRepository.delete(deleteCity.get());
+    }
+
+    @Override
     public List<City> findAllCities() {
         return this.cityRepository.findAll();
     }
