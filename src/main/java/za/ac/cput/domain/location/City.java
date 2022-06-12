@@ -5,6 +5,7 @@ package za.ac.cput.domain.location;
  Student No: 220498385
 */
 import javax.persistence.*;
+import za.ac.cput.domain.location.Country;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 

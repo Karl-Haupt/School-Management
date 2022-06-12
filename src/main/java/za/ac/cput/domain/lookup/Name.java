@@ -1,11 +1,10 @@
+package za.ac.cput.domain.lookup;
 /*
 Author: Trevor Ngcobo (220477019)
 Subject: Applications Development Practice 3
 Group: 18
 Assessment: June Group Assignment 2022
 */
-
-package za.ac.cput.domain.lookup;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -22,6 +21,8 @@ public class Name implements Serializable
     private String middleName;
     @NotNull
     private String lastName;
+
+    protected Name() {}
 
     private Name(Builder builder)
     {
