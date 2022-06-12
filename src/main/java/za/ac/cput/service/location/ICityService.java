@@ -11,6 +11,6 @@ import za.ac.cput.service.IService;
 import java.util.List;
 
 public interface ICityService extends IService<City, String> {
-
+    List<City> findByCountryID(String id);
     List<City> findAllCities();
 }
