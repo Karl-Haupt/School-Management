@@ -26,6 +26,7 @@ public class Address implements Serializable {
     private String streetName;
     @NotNull
     private int postalCode;
+    @Embedded
     @NotNull
     private City city;
 
