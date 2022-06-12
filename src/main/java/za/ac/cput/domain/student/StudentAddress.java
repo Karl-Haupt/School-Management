@@ -29,13 +29,7 @@ public class StudentAddress {
     public String getStudentId(){
       return studentId;
     }
-<<<<<<< HEAD
 
-
-
-=======
-      
->>>>>>> 43b35d619830401856af53a1923f1a07a85a0c17
     public Address getAddress(){
         return address;
     }
