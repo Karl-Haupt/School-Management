@@ -15,7 +15,7 @@ public class AddressFactory {
         Validator.isNull("complexName", complexName);
         Validator.checkStringParam("streetNUmber", streetNUmber);
         Validator.checkStringParam("streetName", streetName);
-        Validator.checkStringParam("postalCode", String.valueOf(postalCode));
+        Validator.isValidPostalCode("postalCode", postalCode);
         Validator.isNull("city", city);
 
         return new Address.Builder()
