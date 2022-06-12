@@ -9,8 +9,9 @@ import za.ac.cput.domain.location.City;
 import za.ac.cput.service.IService;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICityService extends IService<City, String> {
-    List<City> findByCountryID(String id);
+
     List<City> findAllCities();
 }

@@ -7,8 +7,12 @@ package za.ac.cput.repository.location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.location.City;
+
+import java.util.Optional;
+
 @Repository
 public interface CityRepository extends JpaRepository<City,String> {
 
-
+    //SQL COMMAND COMES HERE
+    Optional<City> findCityByCountryID(String id);
 }
