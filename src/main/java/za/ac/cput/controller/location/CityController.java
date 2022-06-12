@@ -14,6 +14,7 @@ import za.ac.cput.domain.location.City;
 import za.ac.cput.factory.location.CityFactory;
 import za.ac.cput.service.location.impl.CityServiceImpl;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -29,7 +30,7 @@ public class CityController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<City> save(@RequestBody City city) {
+    public ResponseEntity<City> save(@Valid @RequestBody City city) {
         log.info("Request to save: {}", city);
         City newCity = CityFactory.buildCity(city.getId(),city.getCityName(),city.getCountry());
         City citySaved = this.cityService.save(newCity);
