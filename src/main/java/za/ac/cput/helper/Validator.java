@@ -31,4 +31,17 @@ public class Validator {
             );
         return validateEmail.isValid(emailAddress);
     }
+
+    public static boolean isValidPostalCode(String paramName, int postalCode) {
+        int postalCodeLength = String.valueOf(postalCode).length();
+        if(!isValidRange(postalCode, 1000, 9999) && postalCodeLength != 4)
+            throw new IllegalArgumentException(
+                    String.format("Invalid value for params: %s", paramName)
+            );
+        return true;
+    }
+
+    private static boolean isValidRange(int value, int begin, int end) {
+        return value > begin && value < end;
+    }
 }
