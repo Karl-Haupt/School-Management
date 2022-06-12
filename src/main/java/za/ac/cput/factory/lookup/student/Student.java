@@ -5,26 +5,31 @@ Group: 18
 Assessment: June Group Assignment 2022
 */
 
-package za.ac.cput.domain.student;
+package za.ac.cput.factory.lookup.student;
 
 import za.ac.cput.domain.lookup.Name;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 
 @Entity
-public class Student
+public class Student implements Serializable
 {
     @NotNull
     @Id
     private String studentId;
     @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     private Name name;
+
+    public Student() {}
 
     private Student(Builder builder)
     {

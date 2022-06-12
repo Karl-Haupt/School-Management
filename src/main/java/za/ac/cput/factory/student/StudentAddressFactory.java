@@ -1,6 +1,6 @@
 package za.ac.cput.factory.student;
 
-import za.ac.cput.domain.student.StudentAddress;
+import za.ac.cput.factory.lookup.student.StudentAddress;
 import za.ac.cput.domain.lookup.Address;
 import za.ac.cput.helper.Validator;
 
