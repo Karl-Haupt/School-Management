@@ -31,7 +31,6 @@ public class EmployeeController {
 
     @PostMapping("save")
     public ResponseEntity<Employee> save(@Valid @RequestBody Employee employee) {
-        log.info("Save request: {} ", employee);
         Employee emp = EmployeeFactory.buildEmployee(employee.getStaffID(), employee.getEmail(), employee.getName());
         return ResponseEntity.ok(employeeService.save(emp));
     }
@@ -44,7 +43,8 @@ public class EmployeeController {
 
     @DeleteMapping("delete")
     public ResponseEntity<Void> delete(Employee employee) {
-        employeeService.delete(employee);
+        log.info("Delete request: {} ", employee);
+        this.employeeService.delete(employee);
         return ResponseEntity.noContent().build();
     }
 
@@ -60,8 +60,8 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeList);
     }
 
-    @GetMapping("read/{email}")
-    public ResponseEntity<Employee> findByEmail(@PathVariable String email) {
+    @GetMapping("read")
+    public ResponseEntity<Employee> findByEmail(@RequestParam("email") String email) {
         var emp = this.employeeService.findEmployeeByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee Not Found"));;
         return ResponseEntity.ok(emp);
     }

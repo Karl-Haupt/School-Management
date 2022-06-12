@@ -68,7 +68,7 @@ class EmployeeServiceImplTest {
 
     @Test
     void getEmployeeByEmail() {
-        var emp = this.service.findEmployeeByEmail("john@gmail.com");
+        var emp = this.service.findEmployeeByEmail("john@gmail.com").get();
         assertAll(
                 () -> assertNotNull(emp),
                 () -> assertEquals(this.employee, emp)
