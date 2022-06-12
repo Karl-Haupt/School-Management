@@ -1,6 +1,7 @@
 package za.ac.cput.domain.student;
 import za.ac.cput.domain.lookup.Address;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,8 @@ public class StudentAddress {
     @Id
     private String studentId;
 
-    @NotNull
+
+    @Embedded
     private Address address;
 
 
@@ -31,7 +33,8 @@ public class StudentAddress {
     }
 
 
-    public String getAddress(){
+
+    public Address getAddress(){
         return address;
     }
 
