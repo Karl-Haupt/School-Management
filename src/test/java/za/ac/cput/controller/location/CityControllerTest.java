@@ -66,10 +66,30 @@ class CityControllerTest {
     @Test
     @Order(3)
     void findCityByCountryID() {
-
+        String byCountryUrl = cityBaseUrl + "read?countryID=" + city.getCountry().getCountryID();
+        ResponseEntity<City> cityCountryResponse = this.cityRestTemp.getForEntity(byCountryUrl, City.class);
+        assertAll(
+                () -> assertEquals(HttpStatus.OK, cityCountryResponse.getStatusCode()),
+                () -> assertNotNull(cityCountryResponse.getBody())
+        );
     }
+
     @Test
     @Order(4)
+    void deleteById() {
+        String deleteByIdUrl = cityBaseUrl + "delete/" + this.city.getId();
+        this.cityRestTemp.delete(deleteByIdUrl);
+    }
+
+    @Test
+    @Order(5)
+    void delete() {
+        String deleteUrl = cityBaseUrl + "delete/";
+        this.cityRestTemp.delete(deleteUrl);
+    }
+
+    @Test
+    @Order(6)
     void findAllCities() {
         String findAllUrl = cityBaseUrl +"all";
         ResponseEntity<City[]> findAllResponse = this.cityRestTemp.
@@ -80,18 +100,5 @@ class CityControllerTest {
                 () -> assertTrue(findAllResponse.getBody().length == 0)
 
         );
-
-    }
-    @Test
-    @Order(5)
-    void deleteById() {
-        String deleteByIdUrl = cityBaseUrl + "delete/" + this.city.getId();
-        this.cityRestTemp.delete(deleteByIdUrl);
-    }
-    @Test
-    @Order(6)
-    void delete() {
-        String deleteUrl = cityBaseUrl + "delete/";
-        this.cityRestTemp.delete(deleteUrl);
     }
 }

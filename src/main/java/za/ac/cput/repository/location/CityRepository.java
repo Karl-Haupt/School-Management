@@ -15,6 +15,6 @@ import java.util.Optional;
 public interface CityRepository extends JpaRepository<City,String> {
 
     //SQL COMMAND COMES HERE
-    @Query()
+    @Query(value = "SELECT * FROM city WHERE city.countryID = ?1", nativeQuery = true)
     Optional<City> findCityByCountryID(String id);
 }
