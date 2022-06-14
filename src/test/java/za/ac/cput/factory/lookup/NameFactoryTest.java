@@ -43,22 +43,11 @@ class NameFactoryTest
     }
 
     @Test
-    void testEmptyMiddleName()  //Middle name is not mandatory, but must not be null
+    void testEmptyMiddleName()
     {
         name = NameFactory.buildName("John", " ", "Kennedy");
         System.out.println(name);
         assertNotNull(name);
-    }
-
-    @Test
-    void testNullMiddleName() //if middle name is null, exception is thrown
-    {
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                ()-> NameFactory.buildName("John", "", "Kennedy"));
-        String expectedMessage = "If theres is no middle name, add space instead.";
-        String returnedMessage = exception.getMessage();
-        assertEquals(expectedMessage, returnedMessage);
-
     }
 
     @Test

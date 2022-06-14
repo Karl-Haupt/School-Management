@@ -9,7 +9,7 @@ package za.ac.cput.repository.student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import za.ac.cput.factory.lookup.student.Student;
+import za.ac.cput.domain.student.Student;
 
 import java.util.List;
 

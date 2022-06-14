@@ -5,7 +5,7 @@ Group: 18
 Assessment: June Group Assignment 2022
 */
 
-package za.ac.cput.factory.lookup.student;
+package za.ac.cput.domain.student;
 
 import za.ac.cput.domain.lookup.Name;
 
@@ -29,7 +29,7 @@ public class Student implements Serializable
     @NotNull
     private Name name;
 
-    public Student() {}
+    protected Student() {}
 
     private Student(Builder builder)
     {

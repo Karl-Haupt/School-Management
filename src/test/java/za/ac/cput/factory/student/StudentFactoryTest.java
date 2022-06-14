@@ -10,7 +10,7 @@ package za.ac.cput.factory.student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.lookup.Name;
-import za.ac.cput.factory.lookup.student.Student;
+import za.ac.cput.domain.student.Student;
 import za.ac.cput.factory.lookup.NameFactory;
 
 import static org.junit.jupiter.api.Assertions.*;

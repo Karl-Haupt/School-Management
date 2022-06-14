@@ -15,12 +15,8 @@ public class NameFactory
     public static Name buildName(String fName, String mName, String lName)
     {
         Validator.checkStringParam("First Name", fName);
+        Validator.isNull("Middle Name", mName);
         Validator.checkStringParam("Last Name", lName);
-
-        if(mName.isEmpty()) //Middle name is not mandatory, but must not be null
-        {
-            throw new IllegalArgumentException(String.format("If theres is no middle name, add space instead."));
-        }
 
         return new Name.Builder().setFirstName(fName).setMiddleName(mName).setLastName(lName).build();
     }

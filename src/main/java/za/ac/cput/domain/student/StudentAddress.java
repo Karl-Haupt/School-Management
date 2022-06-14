@@ -1,4 +1,4 @@
-package za.ac.cput.factory.lookup.student;
+package za.ac.cput.domain.student;
 import za.ac.cput.domain.lookup.Address;
 
 import javax.persistence.Embedded;
