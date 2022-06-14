@@ -11,8 +11,8 @@ import za.ac.cput.helper.Validator;
 
 public class CountryFactory {
     public static Country buildCountry(String countryID, String countryName) {
-        Validator.checkStringParam("Country ID", countryID);
-        Validator.checkStringParam("Country Name", countryName);
+        Validator.checkStringParam("countryID", countryID);
+        Validator.checkStringParam("countryName", countryName);
 
         return new Country.Builder()
                 .setCountryID(countryID)

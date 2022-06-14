@@ -43,7 +43,7 @@ class CountryFactoryTest {
     @Test
     void testCountryIDForNull() {
         Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> CountryFactory.buildCountry("", "South Africa"));
+                () -> CountryFactory.buildCountry(null, "South Africa"));
 
         String expectedMessage = "Invalid value for countryID.";
         String actualMessage = exception.getMessage();
