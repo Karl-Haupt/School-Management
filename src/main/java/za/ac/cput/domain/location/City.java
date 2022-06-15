@@ -30,7 +30,7 @@ public class City {
 
     public City(CityBuilder cityBuilder) {
         this.id = cityBuilder.id;
-        name = cityBuilder.name;
+        this.name = cityBuilder.name;
         this.country = cityBuilder.country;
     }
 
