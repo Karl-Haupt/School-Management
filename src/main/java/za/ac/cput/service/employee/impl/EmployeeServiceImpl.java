@@ -51,4 +51,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Optional<Employee> findEmployeeByEmail(String email) {
         return this.repository.findEmployeeByEmail(email);
     }
+
+    public List<Employee> findEmployeesByCity(String cityID) {
+        return this.repository.findEmployeesByCity(cityID);
+    }
 }

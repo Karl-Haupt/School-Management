@@ -15,8 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.employee.Employee;
 import za.ac.cput.domain.lookup.Name;
 import za.ac.cput.factory.employee.EmployeeFactory;
+import za.ac.cput.factory.location.CityFactory;
+import za.ac.cput.factory.location.CountryFactory;
 import za.ac.cput.factory.lookup.NameFactory;
 import za.ac.cput.repository.employee.EmployeeRepository;
+import za.ac.cput.service.location.impl.CityServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +33,10 @@ class EmployeeServiceImplTest {
     private Name employeeName;
     @Autowired
     private EmployeeServiceImpl service;
+    @Autowired
+    private CityServiceImpl cityService;
+//    @Autowired
+//    private CountryServiceImpl countryService;
     @Autowired @Mock
     private EmployeeRepository repository;
 
@@ -69,9 +76,27 @@ class EmployeeServiceImplTest {
     @Test
     void getEmployeeByEmail() {
         var emp = this.service.findEmployeeByEmail("john@gmail.com").get();
+        System.out.println("Email:" + emp);
         assertAll(
                 () -> assertNotNull(emp),
                 () -> assertEquals(this.employee, emp)
         );
+    }
+
+    @Test
+    void getEmployeesByCity() {
+        AddCityAndCountryToDB();
+        var employeesList = this.service.findEmployeesByCity("1");
+        assertAll(
+                () -> assertNotNull(employeesList),
+                () -> assertEquals(1, employeesList.size())
+        );
+    }
+
+    private void AddCityAndCountryToDB() {
+        var country = CountryFactory.buildCountry("15", "RSA");
+        var city = CityFactory.buildCity("1", "Boston", country);
+
+        cityService.save(city);
     }
 }

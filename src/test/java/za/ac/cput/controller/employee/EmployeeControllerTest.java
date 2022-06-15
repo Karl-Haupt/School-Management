@@ -101,4 +101,15 @@ class EmployeeControllerTest {
                 () -> assertTrue(response.getBody().length == 0)
         );
     }
+
+    @Test
+    @Order(7)
+    void findEmployeesByCity() {
+        String url = baseUrl + "";
+        ResponseEntity<Employee[]> response = this.restTemplate.getForEntity(url, Employee[].class);
+        assertAll(
+                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertTrue(response.getBody().length == 0)
+        );
+    }
 }
