@@ -16,8 +16,14 @@ public class City {
     private String id;
     @NotNull
     private String CityName;
+    @ManyToOne
+    @JoinColumn(name = "FK_countryID", referencedColumnName = "countryID")
     @NotNull
     private Country country;
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     protected City() {
     }
@@ -84,11 +90,11 @@ public class City {
         if (this == o) return true;
         if (!(o instanceof City)) return false;
         City city = (City) o;
-        return id.equals(city.id);
+        return id.equals(city.id) && CityName.equals(city.CityName) && country.equals(city.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, CityName, country);
     }
 }
