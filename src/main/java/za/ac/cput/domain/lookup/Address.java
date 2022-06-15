@@ -8,9 +8,7 @@ package za.ac.cput.domain.lookup;
 
 import za.ac.cput.domain.location.City;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -26,7 +24,8 @@ public class Address implements Serializable {
     private String streetName;
     @NotNull
     private int postalCode;
-    @Embedded
+
+    @ManyToOne
     @NotNull
     private City city;
 
