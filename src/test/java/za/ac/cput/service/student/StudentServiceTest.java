@@ -1,3 +1,10 @@
+/*
+Author: Trevor Ngcobo (220477019)
+Subject: Applications Development Practice 3
+Group: 18
+Assessment: June Group Assignment 2022
+*/
+
 package za.ac.cput.service.student;
 
 import org.junit.jupiter.api.BeforeEach;
