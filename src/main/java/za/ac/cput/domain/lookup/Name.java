@@ -6,6 +6,8 @@ Group: 18
 Assessment: June Group Assignment 2022
 */
 
+import za.ac.cput.helper.Validator;
+
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -22,7 +24,8 @@ public class Name implements Serializable
     @NotNull
     private String lastName;
 
-    protected Name() {}
+    protected Name()
+    {}
 
     private Name(Builder builder)
     {
