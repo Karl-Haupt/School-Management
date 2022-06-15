@@ -11,11 +11,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.employee.Employee;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
-
     @Query(value = "SELECT * FROM employee WHERE employee.email = ?1", nativeQuery = true)
     Optional<Employee> findEmployeeByEmail(String email);
+
+//    @Query(value = "", nativeQuery = true)
+//    List<Employee> findEmployeesByCity(String cityID);
 }
