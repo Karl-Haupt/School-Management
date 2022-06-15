@@ -10,6 +10,7 @@ package za.ac.cput.domain.student;
 import za.ac.cput.domain.lookup.Name;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ public class Student implements Serializable
     @Column(unique = true)
     private String email;
     @NotNull
+    @Embedded
     private Name name;
 
     protected Student() {}
