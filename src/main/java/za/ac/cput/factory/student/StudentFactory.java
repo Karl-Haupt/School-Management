@@ -17,7 +17,7 @@ public class StudentFactory
     public static Student buildStudent(String id, String email, Name name)
     {
         Validator.checkStringParam("Student ID", id);
-        Validator.checkStringParam("Student Email", email);
+        Validator.isValidEmail("Student Email", email);
         Validator.isNull("Student Name", name);
 
         return new Student.Builder().setStudentId(id).setName(name).setEmail(email).build();
