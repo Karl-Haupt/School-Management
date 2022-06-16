@@ -61,14 +61,14 @@ public class EmployeeController {
     }
 
     @GetMapping("read")
-    public ResponseEntity<Employee> findByEmail(@RequestParam("email") String email) {
+    public ResponseEntity<String> findByEmail(@RequestParam("email") String email) {
         var emp = this.employeeService.findEmployeeByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee Not Found"));
         return ResponseEntity.ok(emp);
     }
 
-    @GetMapping("read")
-    public ResponseEntity<List<Employee>> findEmployeesByCity(@RequestParam("cityId") String cityId) {
-        List<Employee> employeeList = this.employeeService.findEmployeesByCity(cityId);
+    @GetMapping("read/city/{cityId}")
+    public ResponseEntity<List<String>> findEmployeesByCity(@PathVariable("cityId") String cityId) {
+        List<String> employeeList = this.employeeService.findEmployeesByCity(cityId);
         return ResponseEntity.ok(employeeList);
     }
 

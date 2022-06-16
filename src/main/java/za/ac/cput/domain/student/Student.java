@@ -10,6 +10,7 @@ package za.ac.cput.domain.student;
 import za.ac.cput.domain.lookup.Name;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;

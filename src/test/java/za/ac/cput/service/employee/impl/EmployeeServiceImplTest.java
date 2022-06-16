@@ -12,14 +12,19 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import za.ac.cput.domain.employee.Employee;
 import za.ac.cput.domain.lookup.Name;
+import za.ac.cput.factory.employee.EmployeeAddressFactory;
 import za.ac.cput.factory.employee.EmployeeFactory;
 import za.ac.cput.factory.location.CityFactory;
 import za.ac.cput.factory.location.CountryFactory;
+import za.ac.cput.factory.lookup.AddressFactory;
 import za.ac.cput.factory.lookup.NameFactory;
+import za.ac.cput.factory.student.StudentAddressFactory;
 import za.ac.cput.repository.employee.EmployeeRepository;
 import za.ac.cput.service.location.impl.CityServiceImpl;
+import za.ac.cput.service.location.impl.CountryServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,10 +38,10 @@ class EmployeeServiceImplTest {
     private Name employeeName;
     @Autowired
     private EmployeeServiceImpl service;
-    @Autowired
-    private CityServiceImpl cityService;
-//    @Autowired
-//    private CountryServiceImpl countryService;
+    @Autowired private CityServiceImpl cityService;
+    @Autowired private CountryServiceImpl countryService;
+    @Autowired private EmployeeAddressServiceImpl addressService;
+
     @Autowired @Mock
     private EmployeeRepository repository;
 
@@ -76,10 +81,9 @@ class EmployeeServiceImplTest {
     @Test
     void getEmployeeByEmail() {
         var emp = this.service.findEmployeeByEmail("john@gmail.com").get();
-        System.out.println("Email:" + emp);
         assertAll(
                 () -> assertNotNull(emp),
-                () -> assertEquals(this.employee, emp)
+                () -> assertEquals(this.employee.getName().getFirstName(), emp)
         );
     }
 
@@ -96,7 +100,12 @@ class EmployeeServiceImplTest {
     private void AddCityAndCountryToDB() {
         var country = CountryFactory.buildCountry("15", "RSA");
         var city = CityFactory.buildCity("1", "Boston", country);
+        var address = AddressFactory.build("13", "Complex Name", "123", "streetName", 1234, city);
+        var employeeAddress = EmployeeAddressFactory.build(employee.getStaffID(), address);
 
-        cityService.save(city);
+        this.service.save(this.employee);
+        this.countryService.save(country);
+        this.cityService.save(city);
+        this.addressService.save(employeeAddress);
     }
 }
