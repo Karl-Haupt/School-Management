@@ -1,4 +1,9 @@
 package za.ac.cput.domain.student;
+/*
+ This is the student address domain/entity class
+ Mponeng Ratego
+ 216178991
+*/
 import za.ac.cput.domain.lookup.Address;
 
 import javax.persistence.Embedded;

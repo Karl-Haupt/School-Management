@@ -25,7 +25,7 @@ class CityFactoryTest {
         assertAll(
                 () -> assertEquals("1-CPT", city.getId()),
                 () -> assertNotEquals(null,city),
-                () -> assertNotNull(city.getCityName()),
+                () -> assertNotNull(city.getName()),
                 () -> assertNotNull(city.getCountry())
         );
     }

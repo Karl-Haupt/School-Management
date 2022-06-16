@@ -28,6 +28,7 @@ public class Student implements Serializable
     @Column(unique = true)
     private String email;
     @NotNull
+    @Embedded
     private Name name;
 
     protected Student() {}
