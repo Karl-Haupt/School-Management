@@ -13,6 +13,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.controller.location.CityController;
+import za.ac.cput.controller.location.CountryController;
 import za.ac.cput.domain.employee.Employee;
 import za.ac.cput.domain.location.City;
 import za.ac.cput.domain.location.Country;
@@ -38,16 +40,15 @@ class EmployeeControllerTest {
     private int port;
     @Autowired
     private EmployeeController controller;
+    @Autowired private EmployeeAddressController addressController;
+    @Autowired private CityController cityController;
+    @Autowired private CountryController countryController;
+
     @Autowired private TestRestTemplate restTemplate;
 
     private Employee employee;
     private String baseUrl;
 
-    @Autowired
-    private EmployeeServiceImpl service;
-    @Autowired private CityServiceImpl cityService;
-    @Autowired private CountryServiceImpl countryService;
-    @Autowired private EmployeeAddressServiceImpl addressService;
 
     @BeforeEach
     void setUp() {
@@ -94,27 +95,30 @@ class EmployeeControllerTest {
     }
 
     @Test
-//    @Order(4)
-//    void findEmployeesByCity() {
-//        var country = CountryFactory.buildCountry("15", "RSA");
-//        var city = CityFactory.buildCity("1", "Boston", country);
-//        AddCityAndCountryToDB(city, country);
-//        String url = baseUrl + "read/city/" + city.getId();
-//        ResponseEntity<String[]> response = this.restTemplate.getForEntity(url, String[].class);
-//        assertAll(
-//                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-//                () -> assertTrue(response.getBody().length == 0)
-//        );
-//    }
+    @Order(4)
+    void findEmployeesByCity() {
+        AddCityAndCountryToDB();
+        String url = baseUrl + "read/city/1";
+        ResponseEntity<String[]> response = this.restTemplate.getForEntity(url, String[].class);
+        for (var n : response.getBody()) {
+            System.out.println(n);
+        }
+        assertAll(
+                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertTrue(response.getBody().length == 1)
+        );
+    }
 
-    private void AddCityAndCountryToDB(City city, Country country) {
+    void AddCityAndCountryToDB() {
+        var country = CountryFactory.buildCountry("15", "RSA");
+        var city = CityFactory.buildCity("1", "Boston", country);
         var address = AddressFactory.build("13", "Complex Name", "123", "streetName", 1234, city);
         var employeeAddress = EmployeeAddressFactory.build(employee.getStaffID(), address);
 
-        this.service.save(this.employee);
-        this.countryService.save(country);
-        this.cityService.save(city);
-        this.addressService.save(employeeAddress);
+//        controller.save(employee);
+        countryController.save(country);
+        cityController.save(city);
+        addressController.save(employeeAddress);
     }
 
     @Test
