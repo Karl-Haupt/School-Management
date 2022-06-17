@@ -48,7 +48,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return this.repository.findAll();
     }
 
-    public Optional<Employee> findEmployeeByEmail(String email) {
+    public Optional<String> findEmployeeByEmail(String email) {
         return this.repository.findEmployeeByEmail(email);
+    }
+
+    public List<String> findEmployeesByCity(String cityID) {
+        return this.repository.findEmployeesByCity(cityID);
     }
 }
