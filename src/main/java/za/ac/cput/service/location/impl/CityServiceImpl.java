@@ -46,6 +46,13 @@ public class CityServiceImpl implements ICityService {
     public List<City> findAllCities() {
         return this.cityRepository.findAll();
     }
+
+    @Override
+    public List<String[]> allCityIdAndCountryId()
+    {
+        return this.cityRepository.allCityIdsAndCountryIds();
+    }
+
     public Optional<City> findCityByCountryID(String countryID) {
         return this.cityRepository.findCityByCountryID(countryID);
     }
