@@ -15,7 +15,7 @@ public class CityFactory {
         Validator.isNull("Country", country);
         return new City.CityBuilder()
                 .setId(id)
-                .setCityName(CityName)
+                .setName(CityName)
                 .setCountry(country)
                 .build();
     }

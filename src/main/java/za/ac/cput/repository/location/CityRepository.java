@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface CityRepository extends JpaRepository<City,String> {
 
     //SQL COMMAND COMES HERE
-    @Query(value = "SELECT * FROM city WHERE city.FK_countryID = ?1 ORDER BY city_name ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM city WHERE city.FK_countryID = ?1 ORDER BY name ASC", nativeQuery = true)
     Optional<City> findCityByCountryID(String id);
 
     @Query(value = "SELECT city.id , city.fk_countryid From city", nativeQuery = true)

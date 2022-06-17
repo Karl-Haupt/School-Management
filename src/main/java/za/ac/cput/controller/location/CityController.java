@@ -32,7 +32,7 @@ public class CityController {
     @PostMapping("save")
     public ResponseEntity<City> save(@Valid @RequestBody City city) {
         log.info("Request to save: {}", city);
-        City newCity = CityFactory.buildCity(city.getId(),city.getCityName(),city.getCountry());
+        City newCity = CityFactory.buildCity(city.getId(),city.getName(),city.getCountry());
         City citySaved = this.cityService.save(newCity);
         return ResponseEntity.ok(citySaved);
     }

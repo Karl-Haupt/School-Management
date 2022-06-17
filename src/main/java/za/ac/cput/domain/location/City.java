@@ -15,7 +15,7 @@ public class City {
     @NotNull
     private String id;
     @NotNull
-    private String CityName;
+    private String name;
     @ManyToOne
     @JoinColumn(name = "FK_countryID", referencedColumnName = "countryID")
     @NotNull
@@ -30,7 +30,7 @@ public class City {
 
     public City(CityBuilder cityBuilder) {
         this.id = cityBuilder.id;
-        CityName = cityBuilder.CityName;
+        this.name = cityBuilder.name;
         this.country = cityBuilder.country;
     }
 
@@ -38,8 +38,8 @@ public class City {
         return id;
     }
 
-    public String getCityName() {
-        return CityName;
+    public String getName() {
+        return name;
     }
 
     public Country getCountry() {
@@ -50,14 +50,14 @@ public class City {
     public String toString() {
         return "City{" +
                 "id='" + id + '\'' +
-                ", CityName='" + CityName + '\'' +
+                ", CityName='" + name + '\'' +
                 ", country=" + country +
                 '}';
     }
 
     public static class CityBuilder{
         private String id;
-        private String CityName;
+        private String name;
         private Country country;
 
         public CityBuilder setId(String id) {
@@ -65,8 +65,8 @@ public class City {
             return this;
         }
 
-        public CityBuilder setCityName(String cityName) {
-            CityName = cityName;
+        public CityBuilder setName(String name) {
+            this.name= name;
             return this;
         }
 
@@ -76,7 +76,7 @@ public class City {
         }
         public CityBuilder copy(City city){
             this.id = city.id;
-            this.CityName = city.CityName;
+            this.name = city.name;
             this.country = city.country;
             return this;
         }
@@ -90,11 +90,11 @@ public class City {
         if (this == o) return true;
         if (!(o instanceof City)) return false;
         City city = (City) o;
-        return id.equals(city.id) && CityName.equals(city.CityName) && country.equals(city.country);
+        return id.equals(city.id) && name.equals(city.name) && country.equals(city.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, CityName, country);
+        return Objects.hash(id, name, country);
     }
 }
