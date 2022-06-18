@@ -15,7 +15,9 @@ import java.util.List;
 public interface StudentService extends IService<Student, String>
 {
     public List<Student> readAll();
-   // public List<String> AllStudentId();
+
     public void deleteById(String studentId);
+
+    List<String[]> readSurname();
 
 }

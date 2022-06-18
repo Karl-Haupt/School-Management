@@ -39,7 +39,7 @@ class CityControllerTest {
     public void startUp(){
         assertNotNull(cityController);
         Country countryObj = CountryFactory.buildCountry("1-RSA","South Africa");
-        this.city = CityFactory.buildCity("1-CPT"," Cape Town",countryObj);
+        this.city = CityFactory.buildCity("1-CPT","Cape Town",countryObj);
         this.cityBaseUrl = "http://localhost:" + this.cityPort + "/api/v1/school-management/city/";
 
     }
