@@ -52,10 +52,10 @@ public class StudentController
         return ResponseEntity.ok(allStudents);
     }
 
-    @GetMapping("readSurname")
-    public ResponseEntity<List<String[]>> readIdAndSurname()
+    @GetMapping("readSurname/{countryId}")
+    public ResponseEntity<List<Student>> readStudentSurnameByCountryId(@PathVariable String countryId)
     {
-        List<String[]> allSurname = this.studentService.readSurname();
+        List<Student> allSurname = this.studentService.getStudentSurnameByCountryId(countryId);
         return ResponseEntity.ok(allSurname);
     }
 

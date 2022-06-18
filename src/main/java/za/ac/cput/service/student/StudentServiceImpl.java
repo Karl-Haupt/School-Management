@@ -44,14 +44,14 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
-    public void deleteById(String studentId)
-    {
-        studentRepository.deleteById(studentId);
+    public List<Student> getStudentSurnameByCountryId(String countryId) {
+        return studentRepository.getStudentSurnamesByCountryId(countryId);
     }
 
     @Override
-    public List<String[]> readSurname() {
-            return studentRepository.readIdAndSurnames();
+    public void deleteById(String studentId)
+    {
+        studentRepository.deleteById(studentId);
     }
 
 
@@ -62,14 +62,5 @@ public class StudentServiceImpl implements StudentService
     }
 
 
-    /*
-    @Override
-    public List<String> AllStudentId()
-    {
-        List<Student> allStudents = readAll();
-        List<String> allIds = allStudents.stream().map(Student::getStudentId).collect(Collectors.toList());
 
-        return allIds;
-    }
-     */
 }
