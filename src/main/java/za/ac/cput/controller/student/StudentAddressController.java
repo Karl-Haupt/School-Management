@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import za.ac.cput.api.student.StudentAddressAPI;
 import za.ac.cput.service.student.StudentAddressImp;
 import za.ac.cput.domain.student.StudentAddress;
 import za.ac.cput.service.student.StudentAddressService;
@@ -23,10 +24,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("school-management/studentAddress/")
 @Slf4j
-public class StudentAddressController {
+public class StudentAddressController  {
 
-   private final StudentAddressService studentAddressService;
-
+    private final StudentAddressService studentAddressService;
 
    @Autowired
    public StudentAddressController(StudentAddressImp studentAddressService) {
@@ -35,10 +35,12 @@ public class StudentAddressController {
 
    @PostMapping("save")
    public ResponseEntity<StudentAddress> save(@Valid @RequestBody StudentAddress studentAddress) {
-       log.info("Request to save Student Address: {}", studentAddress);
+      log.info("Request to save Student Address: {}", studentAddress);
       StudentAddress save = studentAddressService.save(studentAddress);
       return ResponseEntity.ok(save);
    }
+
+
 
    @GetMapping("read/{studentId}")
    public ResponseEntity<StudentAddress> read(@PathVariable String studentId) {
