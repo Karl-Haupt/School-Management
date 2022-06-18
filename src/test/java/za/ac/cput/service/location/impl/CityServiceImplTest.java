@@ -22,17 +22,23 @@ class CityServiceImplTest {
 
     @Autowired
     private CityServiceImpl cityService;
+
+    @Autowired
+    private CountryServiceImpl countryService;
+
+    @Autowired
     private CityRepository cityRepository;
 
     @BeforeEach
     public void startUp(){
-        this.country = CountryFactory.buildCountry("1-RSA","South Africa");
-        this.city = CityFactory.buildCity("1-CPT","Cape Town",country);
+        this.country = CountryFactory.buildCountry("2-SA","South America");
+        this.city = CityFactory.buildCity("2-AMT","American Town",country);
     }
 
     @Test
     @Order(1)
     void save() {
+        AddCountryToDB();
         City saveCity = this.cityService.save(city);
         assertEquals(this.city, saveCity);
     }
@@ -69,10 +75,15 @@ class CityServiceImplTest {
     @Test
     @Order(3)
     void findCityByCountryID() {
-        City cityByCountry = this.cityService.findCityByCountryID("1-RSA").get();
+        AddCountryToDB();
+        var cityByCountry = this.cityService.findCityByCountryID("2-SA");
         assertAll(
                 () -> assertNotNull(cityByCountry),
-                () -> assertEquals(this.city, cityByCountry)
+                () -> assertEquals(1, cityByCountry.size())
         );
+    }
+   void AddCountryToDB(){
+    var country = CountryFactory.buildCountry("2-SA","South America");
+    this.countryService.save(country);
     }
 }

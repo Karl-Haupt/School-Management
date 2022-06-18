@@ -6,15 +6,17 @@ package za.ac.cput.repository.location;
 */
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.location.City;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CityRepository extends JpaRepository<City,String> {
 
     //SQL COMMAND COMES HERE
-    @Query(value = "SELECT * FROM city WHERE city.FK_countryID = ?1 ORDER BY name ASC", nativeQuery = true)
-    Optional<City> findCityByCountryID(String id);
+    @Query(value = "SELECT c.name FROM city c WHERE c.FK_countryID = ?1 ORDER BY name ASC", nativeQuery = true)
+    List<String> findCityByCountryID(@Param("countryID") String id);
 }
