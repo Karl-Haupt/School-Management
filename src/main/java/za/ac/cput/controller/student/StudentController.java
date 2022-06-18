@@ -52,6 +52,14 @@ public class StudentController
         return ResponseEntity.ok(allStudents);
     }
 
+    @GetMapping("readSurname")
+    public ResponseEntity<List<String[]>> readIdAndSurname()
+    {
+        List<String[]> allSurname = this.studentService.readSurname();
+        return ResponseEntity.ok(allSurname);
+    }
+
+
     @DeleteMapping("deleteById/{studentId}")
     public ResponseEntity<Void> deleteById(@PathVariable String studentId)
     {

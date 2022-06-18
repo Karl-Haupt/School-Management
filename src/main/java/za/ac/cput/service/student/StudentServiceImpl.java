@@ -50,6 +50,12 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
+    public List<String[]> readSurname() {
+            return studentRepository.readIdAndSurnames();
+    }
+
+
+    @Override
     public List<Student> readAll()
     {
         return studentRepository.findAll();
