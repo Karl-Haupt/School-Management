@@ -13,10 +13,22 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.controller.location.CityController;
+import za.ac.cput.controller.location.CountryController;
 import za.ac.cput.domain.employee.Employee;
+import za.ac.cput.domain.location.City;
+import za.ac.cput.domain.location.Country;
 import za.ac.cput.domain.lookup.Name;
+import za.ac.cput.factory.employee.EmployeeAddressFactory;
 import za.ac.cput.factory.employee.EmployeeFactory;
+import za.ac.cput.factory.location.CityFactory;
+import za.ac.cput.factory.location.CountryFactory;
+import za.ac.cput.factory.lookup.AddressFactory;
 import za.ac.cput.factory.lookup.NameFactory;
+import za.ac.cput.service.employee.impl.EmployeeAddressServiceImpl;
+import za.ac.cput.service.employee.impl.EmployeeServiceImpl;
+import za.ac.cput.service.location.impl.CityServiceImpl;
+import za.ac.cput.service.location.impl.CountryServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,10 +40,15 @@ class EmployeeControllerTest {
     private int port;
     @Autowired
     private EmployeeController controller;
+    @Autowired private EmployeeAddressController addressController;
+    @Autowired private CityController cityController;
+    @Autowired private CountryController countryController;
+
     @Autowired private TestRestTemplate restTemplate;
 
     private Employee employee;
     private String baseUrl;
+
 
     @BeforeEach
     void setUp() {
@@ -70,7 +87,7 @@ class EmployeeControllerTest {
     @Order(3)
     void findEmployeeByEmail() {
         String url = baseUrl + "read?email=" + employee.getEmail();
-        ResponseEntity<Employee> response = this.restTemplate.getForEntity(url, Employee.class);
+        ResponseEntity<String> response = this.restTemplate.getForEntity(url, String.class);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -78,21 +95,48 @@ class EmployeeControllerTest {
     }
 
     @Test
-    @Order(6)
+    @Order(4)
+    void findEmployeesByCity() {
+        AddCityAndCountryToDB();
+        String url = baseUrl + "read/city/1";
+        ResponseEntity<String[]> response = this.restTemplate.getForEntity(url, String[].class);
+        for (var n : response.getBody()) {
+            System.out.println(n);
+        }
+        assertAll(
+                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertTrue(response.getBody().length == 1)
+        );
+    }
+
+    void AddCityAndCountryToDB() {
+        var country = CountryFactory.buildCountry("15", "RSA");
+        var city = CityFactory.buildCity("1", "Boston", country);
+        var address = AddressFactory.build("13", "Complex Name", "123", "streetName", 1234, city);
+        var employeeAddress = EmployeeAddressFactory.build(employee.getStaffID(), address);
+
+//        controller.save(employee);
+        countryController.save(country);
+        cityController.save(city);
+        addressController.save(employeeAddress);
+    }
+
+    @Test
+    @Order(7)
     void delete() {
         String url = baseUrl + "delete";
         this.restTemplate.delete(url);
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void deleteById() {
         String url = baseUrl + "delete/" + this.employee.getStaffID();
         this.restTemplate.delete(url);
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     void findAll() {
         String url = baseUrl + "all";
         ResponseEntity<Employee[]> response = this.restTemplate.getForEntity(url, Employee[].class);
@@ -101,4 +145,5 @@ class EmployeeControllerTest {
                 () -> assertTrue(response.getBody().length == 0)
         );
     }
+
 }

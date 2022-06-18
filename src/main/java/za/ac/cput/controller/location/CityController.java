@@ -65,9 +65,8 @@ public class CityController {
     }
 
     @GetMapping("read")
-    public ResponseEntity<City> findCityByCountryID(@RequestParam("countryID") String countryID) {
-        City readCityByCountry = this.cityService.findCityByCountryID(countryID).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "No Cities present/found"));
+    public ResponseEntity<List<String>> findCityByCountryID(@RequestParam("countryID") String countryID) {
+        List<String> readCityByCountry = this.cityService.findCityByCountryID(countryID);
         return ResponseEntity.ok(readCityByCountry);
     }
 
