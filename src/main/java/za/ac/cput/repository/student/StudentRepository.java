@@ -19,13 +19,7 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, String>
 {
 
-    @Query (value = "SELECT S.name.lastName " +
-            "FROM Student S " +
-            "INNER JOIN StudentAddress A " +
-            "ON A.studentId = S.studentId " +
-            "INNER JOIN City C " +
-            "ON A.address.city = C.id " +
-            "WHERE C.country = :countryID")
-    List<Student> getStudentSurnamesByCountryId(@Param("countryID")String countryID);
+    @Query (value = "SELECT S.name.lastName FROM Student S, StudentAddress A, City Ci, Country Co WHERE S.studentId = A.studentId AND A.address.city.id = Ci.id AND Ci.country.countryID = Co.countryID AND Co.countryID = :countryID")
+    List<String> getStudentSurnamesByCountryId(@Param("countryID")String countryID);
 
 }

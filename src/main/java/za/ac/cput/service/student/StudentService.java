@@ -17,6 +17,6 @@ public interface StudentService extends IService<Student, String>
     public List<Student> readAll();
 
     public void deleteById(String studentId);
-    List<Student> getStudentSurnameByCountryId(String countryId);
+    List<String> getStudentSurnameByCountryId(String countryId);
 
 }

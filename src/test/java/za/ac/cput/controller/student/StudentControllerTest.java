@@ -15,6 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.controller.location.CityController;
 import za.ac.cput.controller.location.CountryController;
 import za.ac.cput.domain.location.City;
 import za.ac.cput.domain.location.Country;
@@ -39,7 +40,10 @@ class StudentControllerTest
 {
     @LocalServerPort private int port;
     @Autowired private StudentController controller;
+    @Autowired private StudentAddressController addressController;
     @Autowired private CountryController countryController;
+    @Autowired private CityController cityController;
+
     @Autowired private TestRestTemplate restTemplate;
 
     private Student student;
@@ -69,29 +73,16 @@ class StudentControllerTest
     @Test
     @Order(5)
     void readSurnameWithCountryId() {
-        String urlCountry = "http://localhost:" + this.port + "/api/v1/school-management/country/save";
-//        this.countryController.save(this.country);
-        String urlCity = "http://localhost:" + this.port + "/api/v1/school-management/city/save";
-        String urlStudentAddress = "http://localhost:" + this.port + "/school-management/studentAddress/save";
-        String urlStudentSave = baseUrl + "/save";
-        String urlStudentReadSurname = baseUrl + "/readSurname"+ this.country.getCountryID();
+        String urlReadSurname = baseUrl + "readsurname/" + country.getCountryID();
+        this.controller.save(this.student);
+        this.countryController.save(this.country);
+        this.cityController.save(this.city);
+        this.addressController.save(this.studentAddress);
 
-        ResponseEntity<Student> StudentResponse = this.restTemplate.postForEntity(urlStudentSave, this.student, Student.class);
-        assertNotNull(StudentResponse.getBody());
-
-        ResponseEntity<Country> CountryResponse = this.restTemplate.postForEntity(urlCountry, this.country, Country.class);
-        assertNotNull(CountryResponse.getBody());
-
-        ResponseEntity<City> CityResponse = this.restTemplate.postForEntity(urlCity, this.city, City.class);
-        assertNotNull(CityResponse.getBody());
-
-        ResponseEntity<StudentAddress> StudentAddressResponse = this.restTemplate.postForEntity(urlStudentAddress, this.studentAddress, StudentAddress.class);
-        assertNotNull(StudentAddressResponse.getBody());
-
-         //ResponseEntity<List<String>> studentSurnames = this.controller.readStudentSurnameByCountryId(this.country.getCountryID());
-        //ResponseEntity<List<String>> studentSurnames = this.restTemplate.getForEntity(urlStudentReadSurname, List<String>.class);
-        ResponseEntity<Student[]> studentSurnames = this.restTemplate.getForEntity(urlStudentReadSurname, Student[].class);
-        System.out.println("The message : " + studentSurnames.toString());
+        ResponseEntity<String[]> studentSurnames = this.restTemplate.getForEntity(urlReadSurname, String[].class);
+        for (var n : studentSurnames.getBody()) {
+            System.out.println("Surname" + n);
+        }
         assertNotNull(studentSurnames.getBody());
     }
 

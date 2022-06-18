@@ -5,12 +5,13 @@ Group: 18
 Assessment: June Group Assignment 2022
 */
 
-package za.ac.cput.service.student;
+package za.ac.cput.service.student.impl;
 
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.lookup.Name;
 import za.ac.cput.domain.student.Student;
 import za.ac.cput.repository.student.StudentRepository;
+import za.ac.cput.service.student.StudentService;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
-    public List<Student> getStudentSurnameByCountryId(String countryId) {
+    public List<String> getStudentSurnameByCountryId(String countryId) {
         return studentRepository.getStudentSurnamesByCountryId(countryId);
     }
 

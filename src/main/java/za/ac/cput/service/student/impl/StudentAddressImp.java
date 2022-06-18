@@ -1,4 +1,4 @@
-package za.ac.cput.service.student;
+package za.ac.cput.service.student.impl;
 /*
  This is the student address implementation
  Mponeng Ratego
@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.student.StudentAddress;
 import za.ac.cput.repository.student.StudentAddressRepository;
+import za.ac.cput.service.student.StudentAddressService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentAddressImp implements StudentAddressService{
+public class StudentAddressImp implements StudentAddressService {
 
     private StudentAddressRepository repo;
 
