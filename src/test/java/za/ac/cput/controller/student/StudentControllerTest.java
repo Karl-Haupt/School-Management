@@ -65,7 +65,7 @@ class StudentControllerTest
         this.city = CityFactory.buildCity("CITY1", "Luanda", country);
         this.address =
                 AddressFactory.build
-                            ("1","Rose Gardens", "12","Sobukwe Road",3000,city);
+                        ("1","Rose Gardens", "12","Sobukwe Road",3000,city);
         this.studentAddress = StudentAddressFactory.build(this.student.getStudentId(), address);
         this.baseUrl = "http://localhost:" + this.port + "/school-management/student/";
     }
@@ -121,7 +121,7 @@ class StudentControllerTest
         assertAll(
                 ()->assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () ->assertTrue(response.getBody().length == 0)
-                );
+        );
     }
 
     @Test

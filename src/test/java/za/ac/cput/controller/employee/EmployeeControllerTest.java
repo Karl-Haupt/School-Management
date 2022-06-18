@@ -41,7 +41,7 @@ class EmployeeControllerTest {
     @Autowired private TestRestTemplate restTemplate;
 
     private Employee employee;
-    private String employeeBaseURL;
+    private String employeeeBaseURL;
 
 
     @BeforeEach
@@ -49,14 +49,14 @@ class EmployeeControllerTest {
         assertNotNull(controller);
         Name employeeName = NameFactory.buildName("John", "", "Wood");
         this.employee = EmployeeFactory.buildEmployee("1", "john@gmail.com", employeeName);
-        this.employeeBaseURL = "http://localhost:" + this.port + "/api/v1/school-management/employee/";
-        System.out.println(employeeBaseURL);
+        this.employeeeBaseURL = "http://localhost:" + this.port + "/api/v1/school-management/employee/";
+        System.out.println(employeeeBaseURL);
     }
 
     @Test
     @Order(1)
     void save() {
-        String url = employeeBaseURL + "save";
+        String url = employeeeBaseURL + "save";
         ResponseEntity<Employee> response = this.restTemplate.postForEntity(
                 url, this.employee, Employee.class
         );
@@ -69,7 +69,7 @@ class EmployeeControllerTest {
     @Test
     @Order(2)
     void read() {
-        String url = employeeBaseURL + "read/" + employee.getStaffID();
+        String url = employeeeBaseURL + "read/" + employee.getStaffID();
         ResponseEntity<Employee> response = this.restTemplate.getForEntity(url, Employee.class);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
@@ -80,7 +80,7 @@ class EmployeeControllerTest {
     @Test
     @Order(3)
     void findEmployeeByEmail() {
-        String url = employeeBaseURL + "read?email=" + employee.getEmail();
+        String url = employeeeBaseURL + "read?email=" + employee.getEmail();
         ResponseEntity<String> response = this.restTemplate.getForEntity(url, String.class);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
@@ -92,7 +92,7 @@ class EmployeeControllerTest {
     @Order(4)
     void findEmployeesByCity() {
         AddCityAndCountryToDB();
-        String url = employeeBaseURL + "read/city/1";
+        String url = employeeeBaseURL + "read/city/1";
         ResponseEntity<String[]> response = this.restTemplate.getForEntity(url, String[].class);
         for (var n : response.getBody()) {
             System.out.println(n);
@@ -109,7 +109,6 @@ class EmployeeControllerTest {
         var address = AddressFactory.build("13", "Complex Name", "123", "streetName", 1234, city);
         var employeeAddress = EmployeeAddressFactory.build(employee.getStaffID(), address);
 
-//        controller.save(employee);
         countryController.save(country);
         cityController.save(city);
         addressController.save(employeeAddress);
@@ -118,21 +117,21 @@ class EmployeeControllerTest {
     @Test
     @Order(7)
     void delete() {
-        String url = employeeBaseURL + "delete";
+        String url = employeeeBaseURL + "delete";
         this.restTemplate.delete(url);
     }
 
     @Test
     @Order(5)
     void deleteById() {
-        String url = employeeBaseURL + "delete/" + this.employee.getStaffID();
+        String url = employeeeBaseURL + "delete/" + this.employee.getStaffID();
         this.restTemplate.delete(url);
     }
 
     @Test
     @Order(6)
     void findAll() {
-        String url = employeeBaseURL + "all";
+        String url = employeeeBaseURL + "all";
         ResponseEntity<Employee[]> response = this.restTemplate.getForEntity(url, Employee[].class);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
