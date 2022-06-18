@@ -1,5 +1,9 @@
 package za.ac.cput.api.location;
-
+/*
+ This is the city api test
+ Name & Surname: Charles Lemmert
+ Student No: 220498385
+*/
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +38,12 @@ class CityAPITest {
     }
     @Test
     void save() {
-        AddCityandCountry();
+        AddCountryToDB();
         City saved = this.cityAPI.save(this.city);
         System.out.println(this.cityService.read(this.city.getId()));
         assertNotNull(saved);
     }
-    void AddCityandCountry(){
+    void AddCountryToDB(){
         var country = CountryFactory.buildCountry("RSA", "South Africa");
         this.countryService.save(country);
     }
