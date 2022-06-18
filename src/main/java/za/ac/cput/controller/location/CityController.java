@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import za.ac.cput.api.location.CityAPI;
 import za.ac.cput.domain.location.City;
 import za.ac.cput.factory.location.CityFactory;
 import za.ac.cput.service.location.impl.CityServiceImpl;
@@ -23,6 +24,7 @@ import java.util.List;
 @Slf4j
 public class CityController {
     private final CityServiceImpl cityService;
+
 
     @Autowired
     public CityController(CityServiceImpl cityService) {
@@ -65,9 +67,8 @@ public class CityController {
     }
 
     @GetMapping("read")
-    public ResponseEntity<City> findCityByCountryID(@RequestParam("countryID") String countryID) {
-        City readCityByCountry = this.cityService.findCityByCountryID(countryID).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "No Cities present/found"));
+    public ResponseEntity<List<String>> findCityByCountryID(@RequestParam("countryID") String countryID) {
+        List<String> readCityByCountry = this.cityService.findCityByCountryID(countryID);
         return ResponseEntity.ok(readCityByCountry);
     }
 

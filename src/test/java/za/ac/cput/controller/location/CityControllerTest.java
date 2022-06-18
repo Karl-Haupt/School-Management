@@ -27,6 +27,9 @@ class CityControllerTest {
     private CityController cityController;
 
     @Autowired
+    private CountryController countryController;
+
+    @Autowired
     private TestRestTemplate cityRestTemp;
 
     private City city;
@@ -36,16 +39,18 @@ class CityControllerTest {
     public void startUp(){
         assertNotNull(cityController);
         Country countryObj = CountryFactory.buildCountry("1-RSA","South Africa");
-        this.city = CityFactory.buildCity("1-CPT"," Cape Town",countryObj);
+        this.city = CityFactory.buildCity("1-CPT","Cape Town",countryObj);
         this.cityBaseUrl = "http://localhost:" + this.cityPort + "/api/v1/school-management/city/";
 
     }
     @Test
     @Order(1)
     void save() {
+        AddCountryToDB();
         String saveUrl = cityBaseUrl + "save";
         ResponseEntity<City> saveResponse = this.cityRestTemp.
                 postForEntity(saveUrl,this.city, City.class);
+        System.out.println(saveResponse);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, saveResponse.getStatusCode()),
                 () -> assertNotEquals(null,saveResponse)
@@ -66,14 +71,21 @@ class CityControllerTest {
     @Test
     @Order(3)
     void findCityByCountryID() {
+        AddCountryToDB();
         String byCountryUrl = cityBaseUrl + "read?countryID=" + city.getCountry().getCountryID();
-        ResponseEntity<City> cityCountryResponse = this.cityRestTemp.getForEntity(byCountryUrl, City.class);
+        ResponseEntity<String[]> cityCountryResponse = this.cityRestTemp.getForEntity(byCountryUrl, String[].class);
+        for(var n: cityCountryResponse.getBody()){
+            System.out.println(n);
+        }
         assertAll(
                 () -> assertEquals(HttpStatus.OK, cityCountryResponse.getStatusCode()),
                 () -> assertNotNull(cityCountryResponse.getBody())
         );
     }
-
+    void AddCountryToDB(){
+        var country = CountryFactory.buildCountry("1-RSA","South Africa");
+        countryController.save(country);
+    }
     @Test
     @Order(4)
     void deleteById() {
@@ -82,14 +94,14 @@ class CityControllerTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     void delete() {
-        String deleteUrl = cityBaseUrl + "delete/";
+        String deleteUrl = cityBaseUrl + "delete";
         this.cityRestTemp.delete(deleteUrl);
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     void findAllCities() {
         String findAllUrl = cityBaseUrl +"all";
         ResponseEntity<City[]> findAllResponse = this.cityRestTemp.
