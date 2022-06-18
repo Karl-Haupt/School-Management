@@ -72,11 +72,5 @@ public class CityController {
         return ResponseEntity.ok(readCityByCountry);
     }
 
-    @GetMapping("readCityAndCountry")
-    public ResponseEntity<List<String[]>> allCityIdwithCountryId()
-    {
-        List<String[]> allCity = this.cityService.allCityIdAndCountryId();
-        return ResponseEntity.ok(allCity);
-    }
 
 }
